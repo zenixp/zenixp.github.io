@@ -3,8 +3,8 @@
     <channel>
         <title>随记</title>
         <subtitle></subtitle>
-        <icon>http://blog.zenixp.com/images/favicon.ico</icon>
-        <link>http://blog.zenixp.com</link>
+        <icon>https://zenixp.com/blog/images/favicon.ico</icon>
+        <link>https://zenixp.com/blog</link>
         <author>
           <name>Zenix</name>
         </author>
@@ -18,14 +18,14 @@
         <category term="计算机" />
         <category term="日记" />
         <item>
-            <guid isPermalink="true">http://blog.zenixp.com/2f9f6fb3-87a2-8180-80b2-dabd192d9eca/</guid>
+            <guid isPermalink="true">https://zenixp.com/blog/2f9f6fb3-87a2-8180-80b2-dabd192d9eca/</guid>
             <title>db-query skill 介绍</title>
-            <link>http://blog.zenixp.com/2f9f6fb3-87a2-8180-80b2-dabd192d9eca/</link>
-            <category term="学习笔记" scheme="http://blog.zenixp.com/categories/note/" />
-            <category term="clawdbot" scheme="http://blog.zenixp.com/tags/clawdbot/" />
-            <category term="database" scheme="http://blog.zenixp.com/tags/database/" />
-            <category term="ssh" scheme="http://blog.zenixp.com/tags/ssh/" />
-            <category term="skill" scheme="http://blog.zenixp.com/tags/skill/" />
+            <link>https://zenixp.com/blog/2f9f6fb3-87a2-8180-80b2-dabd192d9eca/</link>
+            <category term="学习笔记" scheme="https://zenixp.com/blog/categories/note/" />
+            <category term="clawdbot" scheme="https://zenixp.com/blog/tags/clawdbot/" />
+            <category term="database" scheme="https://zenixp.com/blog/tags/database/" />
+            <category term="ssh" scheme="https://zenixp.com/blog/tags/ssh/" />
+            <category term="skill" scheme="https://zenixp.com/blog/tags/skill/" />
             <pubDate>Sat, 31 Jan 2026 00:00:00 +0800</pubDate>
             <description><![CDATA[ &lt;p&gt;db-query 是一个强大的 Clawdbot 技能，用于查询项目数据库并自动管理 SSH 隧道连接。&lt;/p&gt;
 &lt;h3 id=&#34;主要功能&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#主要功能&#34;&gt;#&lt;/a&gt; 主要功能&lt;/h3&gt;
@@ -59,14 +59,14 @@
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">http://blog.zenixp.com/29bf6fb3-87a2-80dd-b65f-fc92e19c09d9/</guid>
+            <guid isPermalink="true">https://zenixp.com/blog/29bf6fb3-87a2-80dd-b65f-fc92e19c09d9/</guid>
             <title>Shoka主题的Hexo与Notion集成</title>
-            <link>http://blog.zenixp.com/29bf6fb3-87a2-80dd-b65f-fc92e19c09d9/</link>
-            <category term="学习笔记" scheme="http://blog.zenixp.com/categories/note/" />
-            <category term="hexo" scheme="http://blog.zenixp.com/tags/hexo/" />
-            <category term="shoka" scheme="http://blog.zenixp.com/tags/shoka/" />
-            <category term="notion" scheme="http://blog.zenixp.com/tags/notion/" />
-            <category term="waline" scheme="http://blog.zenixp.com/tags/waline/" />
+            <link>https://zenixp.com/blog/29bf6fb3-87a2-80dd-b65f-fc92e19c09d9/</link>
+            <category term="学习笔记" scheme="https://zenixp.com/blog/categories/note/" />
+            <category term="hexo" scheme="https://zenixp.com/blog/tags/hexo/" />
+            <category term="shoka" scheme="https://zenixp.com/blog/tags/shoka/" />
+            <category term="notion" scheme="https://zenixp.com/blog/tags/notion/" />
+            <category term="waline" scheme="https://zenixp.com/blog/tags/waline/" />
             <pubDate>Wed, 10 Sep 2025 00:00:00 +0800</pubDate>
             <description><![CDATA[ &lt;p&gt;笔者是 notion 的重度使用用户，所以一直想把 notion 的页面直接转成 hexo 的页面，正好拿本站来实行我的想法，&lt;/p&gt;
 &lt;p&gt;顺便简单介绍一下本站运转方式。&lt;/p&gt;
@@ -155,13 +155,13 @@
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">http://blog.zenixp.com/299f6fb3-87a2-80fd-bb41-ccebb300392d/</guid>
+            <guid isPermalink="true">https://zenixp.com/blog/299f6fb3-87a2-80fd-bb41-ccebb300392d/</guid>
             <title>使用docker-compose安装gitlab和gitlab-runner</title>
-            <link>http://blog.zenixp.com/299f6fb3-87a2-80fd-bb41-ccebb300392d/</link>
-            <category term="学习笔记" scheme="http://blog.zenixp.com/categories/note/" />
-            <category term="docker" scheme="http://blog.zenixp.com/tags/docker/" />
-            <category term="docker-compose" scheme="http://blog.zenixp.com/tags/docker-compose/" />
-            <category term="gitlab" scheme="http://blog.zenixp.com/tags/gitlab/" />
+            <link>https://zenixp.com/blog/299f6fb3-87a2-80fd-bb41-ccebb300392d/</link>
+            <category term="学习笔记" scheme="https://zenixp.com/blog/categories/note/" />
+            <category term="docker" scheme="https://zenixp.com/blog/tags/docker/" />
+            <category term="docker-compose" scheme="https://zenixp.com/blog/tags/docker-compose/" />
+            <category term="gitlab" scheme="https://zenixp.com/blog/tags/gitlab/" />
             <pubDate>Tue, 09 Sep 2025 00:00:00 +0800</pubDate>
             <description><![CDATA[ &lt;p&gt;本文记录使用 Docker Compose 部署 GitLab 与 GitLab Runner 的完整流程与常见踩坑，附可直接使用的示例配置与排错指引。&lt;/p&gt;
 &lt;hr /&gt;
@@ -230,13 +230,13 @@
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">http://blog.zenixp.com/2a1f6fb3-87a2-80ed-81b3-fe18fe6ac865/</guid>
+            <guid isPermalink="true">https://zenixp.com/blog/2a1f6fb3-87a2-80ed-81b3-fe18fe6ac865/</guid>
             <title>部署nexus作为docker镜像的私有仓库</title>
-            <link>http://blog.zenixp.com/2a1f6fb3-87a2-80ed-81b3-fe18fe6ac865/</link>
-            <category term="学习笔记" scheme="http://blog.zenixp.com/categories/note/" />
-            <category term="docker" scheme="http://blog.zenixp.com/tags/docker/" />
-            <category term="docker-compose" scheme="http://blog.zenixp.com/tags/docker-compose/" />
-            <category term="nexus" scheme="http://blog.zenixp.com/tags/nexus/" />
+            <link>https://zenixp.com/blog/2a1f6fb3-87a2-80ed-81b3-fe18fe6ac865/</link>
+            <category term="学习笔记" scheme="https://zenixp.com/blog/categories/note/" />
+            <category term="nexus" scheme="https://zenixp.com/blog/tags/nexus/" />
+            <category term="docker" scheme="https://zenixp.com/blog/tags/docker/" />
+            <category term="docker-compose" scheme="https://zenixp.com/blog/tags/docker-compose/" />
             <pubDate>Wed, 09 Jul 2025 00:00:00 +0800</pubDate>
             <description><![CDATA[ &lt;h3 id=&#34;前言&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#前言&#34;&gt;#&lt;/a&gt; 前言&lt;/h3&gt;
 &lt;p&gt;在学习 k8s 时，打包应用镜像，需要搭建 docker 私有仓库，网路上主流都是用 harbor，但 harbor 部署时占用了太多资源，对于使用过 maven 私有库的人应该不陌生的 nexus 就可以拿来作为 docker 私有仓库来使用。&lt;/p&gt;
@@ -261,13 +261,13 @@
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">http://blog.zenixp.com/2a2f6fb3-87a2-8028-a6e1-eac908237d48/</guid>
+            <guid isPermalink="true">https://zenixp.com/blog/2a2f6fb3-87a2-8028-a6e1-eac908237d48/</guid>
             <title>搭建softether 随时随地访问本地资源</title>
-            <link>http://blog.zenixp.com/2a2f6fb3-87a2-8028-a6e1-eac908237d48/</link>
-            <category term="学习笔记" scheme="http://blog.zenixp.com/categories/note/" />
-            <category term="docker" scheme="http://blog.zenixp.com/tags/docker/" />
-            <category term="softether" scheme="http://blog.zenixp.com/tags/softether/" />
-            <category term="vpn" scheme="http://blog.zenixp.com/tags/vpn/" />
+            <link>https://zenixp.com/blog/2a2f6fb3-87a2-8028-a6e1-eac908237d48/</link>
+            <category term="学习笔记" scheme="https://zenixp.com/blog/categories/note/" />
+            <category term="docker" scheme="https://zenixp.com/blog/tags/docker/" />
+            <category term="softether" scheme="https://zenixp.com/blog/tags/softether/" />
+            <category term="vpn" scheme="https://zenixp.com/blog/tags/vpn/" />
             <pubDate>Mon, 05 May 2025 00:00:00 +0800</pubDate>
             <description><![CDATA[ &lt;h2 id=&#34;前言&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#前言&#34;&gt;#&lt;/a&gt; 前言&lt;/h2&gt;
 &lt;p&gt;在进行大型项目外包或协作时，经常需要通过 VPN 访问私有代码仓库或内网资源。本文演示如何使用 &lt;a href=&#34;https://www.softether.org/&#34;&gt;&lt;strong&gt;SoftEther&lt;/strong&gt;&lt;/a&gt; 快速搭建一个稳定、易用的开发访问环境。&lt;/p&gt;
