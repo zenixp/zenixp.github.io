@@ -1,0 +1,323 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://blog.zenixp.com</id>
+    <title>随记</title>
+    <subtitle></subtitle>
+    <icon>http://blog.zenixp.com/images/favicon.ico</icon>
+    <link href="http://blog.zenixp.com" />
+    <author>
+      <name>Zenix</name>
+    </author>
+    <updated>2026-01-30T16:00:00.000Z</updated>
+    <category term="zenix" />
+    <category term="开发" />
+    <category term="development" />
+    <category term="计算机" />
+    <category term="日记" />
+    <entry>
+        <id>http://blog.zenixp.com/2f9f6fb3-87a2-8180-80b2-dabd192d9eca/</id>
+        <title>db-query skill 介绍</title>
+        <link rel="alternate" href="http://blog.zenixp.com/2f9f6fb3-87a2-8180-80b2-dabd192d9eca/"/>
+        <content type="html">&lt;p&gt;db-query 是一个强大的 Clawdbot 技能，用于查询项目数据库并自动管理 SSH 隧道连接。&lt;/p&gt;
+&lt;h3 id=&#34;主要功能&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#主要功能&#34;&gt;#&lt;/a&gt; 主要功能&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;自动管理 SSH 隧道生命周期&lt;/li&gt;
+&lt;li&gt;支持多个数据库配置&lt;/li&gt;
+&lt;li&gt;查询前自动建立隧道，查询后自动关闭&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;📖 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuY2xhd2h1Yi5haS96ZW5peHAvZGItcXVlcnk=&#34;&gt;ClawHub 页面&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;💻 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL3plbml4cC9kYi1xdWVyeS5za2lsbA==&#34;&gt;GitHub 仓库&lt;/span&gt;&lt;/p&gt;
+&lt;h3 id=&#34;使用方法&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#使用方法&#34;&gt;#&lt;/a&gt; 使用方法&lt;/h3&gt;
+&lt;p&gt;db-query 技能通过配置文件管理多个数据库连接，特别适合需要通过 SSH 隧道访问的数据库环境。&lt;/p&gt;
+&lt;h3 id=&#34;配置文件设置&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#配置文件设置&#34;&gt;#&lt;/a&gt; 配置文件设置&lt;/h3&gt;
+&lt;p&gt;&lt;figure class=&#34;highlight json&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;# ~/.config/db-query/config.json&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;span class=&#34;attr&#34;&gt;&amp;quot;databases&amp;quot;&lt;/span&gt;&lt;span class=&#34;punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;&amp;quot;production&amp;quot;&lt;/span&gt;&lt;span class=&#34;punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;attr&#34;&gt;&amp;quot;description&amp;quot;&lt;/span&gt;&lt;span class=&#34;punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;quot;生产环境数据库&amp;quot;&lt;/span&gt;&lt;span class=&#34;punctuation&#34;&gt;,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;attr&#34;&gt;&amp;quot;host&amp;quot;&lt;/span&gt;&lt;span class=&#34;punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;quot;localhost&amp;quot;&lt;/span&gt;&lt;span class=&#34;punctuation&#34;&gt;,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;attr&#34;&gt;&amp;quot;port&amp;quot;&lt;/span&gt;&lt;span class=&#34;punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;3306&lt;/span&gt;&lt;span class=&#34;punctuation&#34;&gt;,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;attr&#34;&gt;&amp;quot;database&amp;quot;&lt;/span&gt;&lt;span class=&#34;punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;quot;myapp&amp;quot;&lt;/span&gt;&lt;span class=&#34;punctuation&#34;&gt;,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;attr&#34;&gt;&amp;quot;username&amp;quot;&lt;/span&gt;&lt;span class=&#34;punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;quot;db_user&amp;quot;&lt;/span&gt;&lt;span class=&#34;punctuation&#34;&gt;,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;attr&#34;&gt;&amp;quot;ssh_tunnel&amp;quot;&lt;/span&gt;&lt;span class=&#34;punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;attr&#34;&gt;&amp;quot;host&amp;quot;&lt;/span&gt;&lt;span class=&#34;punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;quot;prod-server.example.com&amp;quot;&lt;/span&gt;&lt;span class=&#34;punctuation&#34;&gt;,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;attr&#34;&gt;&amp;quot;user&amp;quot;&lt;/span&gt;&lt;span class=&#34;punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;quot;deploy&amp;quot;&lt;/span&gt;&lt;span class=&#34;punctuation&#34;&gt;,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        &lt;span class=&#34;attr&#34;&gt;&amp;quot;port&amp;quot;&lt;/span&gt;&lt;span class=&#34;punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;22&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;span class=&#34;punctuation&#34;&gt;,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;&amp;quot;staging&amp;quot;&lt;/span&gt;&lt;span class=&#34;punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;attr&#34;&gt;&amp;quot;description&amp;quot;&lt;/span&gt;&lt;span class=&#34;punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;quot;测试环境数据库&amp;quot;&lt;/span&gt;&lt;span class=&#34;punctuation&#34;&gt;,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;attr&#34;&gt;&amp;quot;host&amp;quot;&lt;/span&gt;&lt;span class=&#34;punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;quot;localhost&amp;quot;&lt;/span&gt;&lt;span class=&#34;punctuation&#34;&gt;,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;attr&#34;&gt;&amp;quot;port&amp;quot;&lt;/span&gt;&lt;span class=&#34;punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;5432&lt;/span&gt;&lt;span class=&#34;punctuation&#34;&gt;,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;attr&#34;&gt;&amp;quot;database&amp;quot;&lt;/span&gt;&lt;span class=&#34;punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;quot;myapp_staging&amp;quot;&lt;/span&gt;&lt;span class=&#34;punctuation&#34;&gt;,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;attr&#34;&gt;&amp;quot;username&amp;quot;&lt;/span&gt;&lt;span class=&#34;punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;quot;postgres&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;span class=&#34;punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&#34;基本使用&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#基本使用&#34;&gt;#&lt;/a&gt; 基本使用&lt;/h3&gt;
+&lt;p&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 查询生产环境用户数据&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;db-query production &lt;span class=&#34;string&#34;&gt;&amp;quot;SELECT * FROM users WHERE active = 1 LIMIT 10&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 查询测试环境订单统计&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;db-query staging &lt;span class=&#34;string&#34;&gt;&amp;quot;SELECT status, COUNT(*) FROM orders GROUP BY status&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 不使用 SSH 隧道的本地查询&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;db-query &lt;span class=&#34;built_in&#34;&gt;local&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;quot;SELECT NOW()&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&#34;高级功能&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#高级功能&#34;&gt;#&lt;/a&gt; 高级功能&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;🔗 自动 SSH 隧道管理：查询前建立连接，完成后自动清理&lt;/li&gt;
+&lt;li&gt;📊 结果格式化：支持 JSON、表格等多种输出格式&lt;/li&gt;
+&lt;li&gt;🔐 安全连接：支持 SSH 密钥认证和密码认证&lt;/li&gt;
+&lt;li&gt;⚡ 批量查询：一次执行多个 SQL 语句&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;适用场景&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#适用场景&#34;&gt;#&lt;/a&gt; 适用场景&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;开发环境需要访问生产数据库进行数据调试&lt;/li&gt;
+&lt;li&gt;CI/CD 流程中的数据库检查和数据迁移&lt;/li&gt;
+&lt;li&gt;运维脚本中的数据库监控和统计&lt;/li&gt;
+&lt;li&gt;多环境数据库的统一管理&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        <category term="学习笔记" scheme="http://blog.zenixp.com/categories/note/" />
+        <category term="clawdbot" scheme="http://blog.zenixp.com/tags/clawdbot/" />
+        <category term="database" scheme="http://blog.zenixp.com/tags/database/" />
+        <category term="ssh" scheme="http://blog.zenixp.com/tags/ssh/" />
+        <category term="skill" scheme="http://blog.zenixp.com/tags/skill/" />
+        <updated>2026-01-30T16:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://blog.zenixp.com/29bf6fb3-87a2-80dd-b65f-fc92e19c09d9/</id>
+        <title>Shoka主题的Hexo与Notion集成</title>
+        <link rel="alternate" href="http://blog.zenixp.com/29bf6fb3-87a2-80dd-b65f-fc92e19c09d9/"/>
+        <content type="html">&lt;p&gt;笔者是 notion 的重度使用用户，所以一直想把 notion 的页面直接转成 hexo 的页面，正好拿本站来实行我的想法，&lt;/p&gt;
+&lt;p&gt;顺便简单介绍一下本站运转方式。&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL3plbml4cC9oZXhvLXNob2thLW5vdGlvbi5naXQ=&#34;&gt;源代码仓库&lt;/span&gt;&lt;/p&gt;
+&lt;h2 id=&#34;项目结构&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#项目结构&#34;&gt;#&lt;/a&gt; &lt;strong&gt;项目结构&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;figcaption&gt;&lt;span&gt;text&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;├── source/                 # 源内容&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;│   ├── _posts/            # 生成的博客文章 (来自 Notion)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;│   └── assets/            # 下载的资源 (图片)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── themes/shoka/          # Shoka 主题文件&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── public/                # 生成的静态站点&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── _config.yml            # 主 Hexo 配置&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── _config.shoka.yml      # 主题配置&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;└── notion_sync.js         # Notion 同步脚本&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/assets/29bf6fb3-87a2-80dd-b65f-fc92e19c09d9/1762423439334_image.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;安装&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#安装&#34;&gt;#&lt;/a&gt; &lt;strong&gt;安装&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;克隆仓库:&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;git &lt;span class=&#34;built_in&#34;&gt;clone&lt;/span&gt; https://github.com/zenixp/hexo-shoka-notion.git&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;cd&lt;/span&gt; hexo-shoka-notion&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装依赖:&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;yarn install&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;配置&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#配置&#34;&gt;#&lt;/a&gt; &lt;strong&gt;配置&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;设置 Notion integration:
+&lt;ul&gt;
+&lt;li&gt;创建一个 Notion integration 并获取您的令牌（具体如何获取下面会说）&lt;/li&gt;
+&lt;li&gt;在  &lt;code&gt;.env&lt;/code&gt;  文件中添加  &lt;code&gt;NOTION_TOKEN&lt;/code&gt;  和  &lt;code&gt;NOTION_DATA_SOURCE&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;设置 waline:
+&lt;ul&gt;
+&lt;li&gt;waline 部署请参考 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93YWxpbmUuanMub3JnL2d1aWRlL2dldC1zdGFydGVkLw==&#34;&gt;https://waline.js.org/guide/get-started/&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;将地址配置到_config.yml 中&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;figure class=&#34;highlight yaml&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;attr&#34;&gt;waline:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;span class=&#34;attr&#34;&gt;url:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;http://your-waline-url&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;其他配置请参考原 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9zaG9rYS5sb3N0eXUubWUvY29tcHV0ZXItc2NpZW5jZS9ub3RlL3RoZW1lLXNob2thLWRvYy8=&#34;&gt;Shoka 文档&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;开发命令&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#开发命令&#34;&gt;#&lt;/a&gt; &lt;strong&gt;开发命令&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 启动本地开发服务器&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;yarn run server&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 从 Notion 同步内容&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;yarn run &lt;span class=&#34;built_in&#34;&gt;sync&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 生成静态文件&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;yarn run build&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 清除缓存文件&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;yarn run clean&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 索引文章到 Algolia 搜索&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;yarn run algolia&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h2 id=&#34;notion-集成&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#notion-集成&#34;&gt;#&lt;/a&gt; &lt;strong&gt;Notion 集成&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;使用  &lt;code&gt;notion_sync.js&lt;/code&gt;  脚本从 Notion 数据库中拉取内容。脚本会：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;从您的 Notion 数据库中获取已发布的文章&lt;/li&gt;
+&lt;li&gt;将 Notion 页面转换为 Markdown 格式&lt;/li&gt;
+&lt;li&gt;下载和管理图片和资源&lt;/li&gt;
+&lt;li&gt;生成带有标签、分类和元数据的正确前言&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;如何获取notion的token&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#如何获取notion的token&#34;&gt;#&lt;/a&gt; 如何获取 notion 的 token&lt;/h3&gt;
+&lt;p&gt;打开 notion，我这里用的是 desktop 版&lt;/p&gt;
+&lt;p&gt;打开 Settings &amp;gt; Connections &amp;gt; Develop or manage integrations&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/assets/29bf6fb3-87a2-80dd-b65f-fc92e19c09d9/1762423442081_image.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;根据页面提示创建一个新的 integration&lt;/p&gt;
+&lt;p&gt;进入到刚刚创建的 integration，把 secret 复制下载保存好，并确保 read 权限是勾起来的&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/assets/29bf6fb3-87a2-80dd-b65f-fc92e19c09d9/1762423443178_image.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;如何创建notion数据库&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#如何创建notion数据库&#34;&gt;#&lt;/a&gt; 如何创建 notion 数据库&lt;/h3&gt;
+&lt;p&gt;回到 notion 创建一个新页面，页面类型选择 Database，然后创建一个 table 作为 data_source&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;必需的 table 属性&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Title&lt;/code&gt;  (标题) - 文章标题&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Published&lt;/code&gt;  (复选框) - 是否发布文章&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Date&lt;/code&gt;  (日期) - 发布日期&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Tags&lt;/code&gt;  (多选) - 文章标签&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Category&lt;/code&gt;  (下拉) - 文章分类&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Cover&lt;/code&gt;  (文件) - 文章封面图片&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;创建好后我们要在 notion integration 里配置页面的访问权限&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/assets/29bf6fb3-87a2-80dd-b65f-fc92e19c09d9/1762423444286_image.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;如何获取data_source-id&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#如何获取data_source-id&#34;&gt;#&lt;/a&gt; 如何获取 data_source id&lt;/h3&gt;
+&lt;p&gt;回到 notion 右键左边我们刚刚创建的数据库菜单选择 copy link，会得到类似下面这样的链接，中间这个就是 database 的 id&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/assets/29bf6fb3-87a2-80dd-b65f-fc92e19c09d9/1762423445492_image.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;但我们需要的是 data_source 的 id，所以需要用 postman 请求获取&lt;/p&gt;
+&lt;p&gt;上面获取的 secret 就是我们请求需要的 token，然后将 data_sources.id 复制保存下来&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/assets/29bf6fb3-87a2-80dd-b65f-fc92e19c09d9/1762423446423_image.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;将 secret 和 data_source 的 id 写到.env 文件中即可&lt;/p&gt;
+&lt;h2 id=&#34;部署&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#部署&#34;&gt;#&lt;/a&gt; &lt;strong&gt;部署&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;要部署您的博客，可以使用任何静态托管服务：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;构建流程:&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 从 Notion 同步内容&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;yarn run &lt;span class=&#34;built_in&#34;&gt;sync&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 同步内容到 algolia （如果有配置algolia）&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;yarn run algolia&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 生成静态文件&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;yarn run build&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;将  &lt;code&gt;public/&lt;/code&gt;  目录部署到任何静态文件托管服务&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        <category term="学习笔记" scheme="http://blog.zenixp.com/categories/note/" />
+        <category term="hexo" scheme="http://blog.zenixp.com/tags/hexo/" />
+        <category term="shoka" scheme="http://blog.zenixp.com/tags/shoka/" />
+        <category term="notion" scheme="http://blog.zenixp.com/tags/notion/" />
+        <category term="waline" scheme="http://blog.zenixp.com/tags/waline/" />
+        <updated>2025-09-09T16:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://blog.zenixp.com/299f6fb3-87a2-80fd-bb41-ccebb300392d/</id>
+        <title>使用docker-compose安装gitlab和gitlab-runner</title>
+        <link rel="alternate" href="http://blog.zenixp.com/299f6fb3-87a2-80fd-bb41-ccebb300392d/"/>
+        <content type="html">&lt;p&gt;本文记录使用 Docker Compose 部署 GitLab 与 GitLab Runner 的完整流程与常见踩坑，附可直接使用的示例配置与排错指引。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h3 id=&#34;前置准备&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#前置准备&#34;&gt;#&lt;/a&gt; 前置准备&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;已安装 Docker 与 Docker Compose（参考&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9kb2NzLmRvY2tlci5jb20vZW5naW5lL2luc3RhbGwv&#34;&gt;官方文档&lt;/span&gt;）&lt;/li&gt;
+&lt;li&gt;新建项目目录，例如 gitlab，并在目录内编写 docker-compose.yml&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;docker-composeyml-示例&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#docker-composeyml-示例&#34;&gt;#&lt;/a&gt; docker-compose.yml 示例&lt;/h3&gt;
+&lt;p&gt;&lt;figure class=&#34;highlight yaml&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;39&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;40&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;41&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;attr&#34;&gt;services:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;span class=&#34;attr&#34;&gt;gitlab:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;image:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;gitlab/gitlab-ce:latest&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;restart:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;always&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;privileged:&lt;/span&gt; &lt;span class=&#34;literal&#34;&gt;true&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;hostname:&lt;/span&gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;localhost&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;container_name:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;gitlab&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;environment:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;attr&#34;&gt;GITLAB_OMNIBUS_CONFIG:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;|&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;        external_url &amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&lt;/span&gt;&lt;span class=&#34;string&#34;&gt;http://example:8888&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;string&#34;&gt;        gitlab_rails[&amp;#x27;&lt;/span&gt;&lt;span class=&#34;string&#34;&gt;gitlab_shell_ssh_port&amp;#x27;]&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;2222&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;ports:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;bullet&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;quot;8888:8888&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;bullet&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;quot;8443:443&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;bullet&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;quot;2222:22&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;volumes:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;bullet&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;./config:/etc/gitlab&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;bullet&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;./logs:/var/log/gitlab&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;bullet&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;./data:/var/opt/gitlab&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;networks:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;bullet&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;gitlab&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;span class=&#34;attr&#34;&gt;gitlab-runner:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;image:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;gitlab/gitlab-runner:alpine&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;container_name:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;gitlab-runner&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;restart:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;always&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;depends_on:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;bullet&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;gitlab&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;volumes:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;bullet&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;/var/run/docker.sock:/var/run/docker.sock&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;bullet&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;./gitlab-runner:/etc/gitlab-runner&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;networks:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;bullet&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;gitlab&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;attr&#34;&gt;networks:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;span class=&#34;attr&#34;&gt;gitlab:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;name:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;gitlab-network&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;提示：示例中 HTTP 暴露为 8888，SSH 暴露为 2222，请确保与 external_url 及容器内部端口保持一致。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h3 id=&#34;踩坑记录&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#踩坑记录&#34;&gt;#&lt;/a&gt; 踩坑记录&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;踩坑 1：端口必须一致
+&lt;ul&gt;
+&lt;li&gt;映射端口、容器内部端口与 external_url 中端口需一致。&lt;/li&gt;
+&lt;li&gt;避免使用 8080，会冲突。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;踩坑 2：Windows 挂载权限问题
+&lt;ul&gt;
+&lt;li&gt;宿主机为 Windows 时，推荐使用 “命名卷” 挂载，避免 Runner 上传 Artifacts 时出现 “目录无权限” 错误。参考：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;figure class=&#34;highlight yaml&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;attr&#34;&gt;services:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;span class=&#34;attr&#34;&gt;gitlab:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;comment&#34;&gt;# ...&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;volumes:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;bullet&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;quot;gitlab-config:/etc/gitlab&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;bullet&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;quot;gitlab-logs:/var/log/gitlab&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;bullet&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;quot;gitlab-data:/var/opt/gitlab&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;comment&#34;&gt;# ...&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;span class=&#34;attr&#34;&gt;gitlab-runner:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;comment&#34;&gt;# ...&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;volumes:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;bullet&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;/var/run/docker.sock:/var/run/docker.sock&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;bullet&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;quot;gitlab-runner:/etc/gitlab-runner&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;comment&#34;&gt;# ...&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;attr&#34;&gt;volumes:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;span class=&#34;attr&#34;&gt;gitlab-runner:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;driver:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;local&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;span class=&#34;attr&#34;&gt;gitlab-config:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;driver:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;local&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;span class=&#34;attr&#34;&gt;gitlab-logs:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;driver:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;local&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;span class=&#34;attr&#34;&gt;gitlab-data:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;driver:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;local&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;相关讨论见：&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9mb3J1bS5naXRsYWIuY29tL3QvNTAwLWludGVybmFsLWVycm9yLXdoZW4tdHJ5aW5nLXRvLXVwbG9hZC1hcnRpZmFjdHMvNDM3MDkvOA==&#34;&gt;Runner 上传归档权限问题&lt;/span&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h3 id=&#34;启动服务&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#启动服务&#34;&gt;#&lt;/a&gt; 启动服务&lt;/h3&gt;
+&lt;p&gt;在项目目录下执行：&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;docker-compose up -d&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;首次拉取与初始化较慢，请耐心等待。随后获取默认管理员密码：&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;docker &lt;span class=&#34;built_in&#34;&gt;exec&lt;/span&gt; -it gitlab &lt;span class=&#34;built_in&#34;&gt;cat&lt;/span&gt; /etc/gitlab/initial_root_password&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h3 id=&#34;注册-runner&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#注册-runner&#34;&gt;#&lt;/a&gt; 注册 Runner&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;登陆 GitLab 后台，在 “管理员” 页面创建 Runner。&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/assets/299f6fb3-87a2-80fd-bb41-ccebb300392d/1763050885957_img_1.png&#34; alt=&#34;img_1.png&#34; /&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;复制创建完成后的 Token。&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/assets/299f6fb3-87a2-80fd-bb41-ccebb300392d/1763050886769_img.png&#34; alt=&#34;img.png&#34; /&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;执行注册命令（将 url 与 token 替换为实际值）：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;docker &lt;span class=&#34;built_in&#34;&gt;exec&lt;/span&gt; -it gitlab-runner \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  gitlab-runner register \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  --url &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;http://example:8888&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  --token youtoken&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h3 id=&#34;runner-常用配置&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#runner-常用配置&#34;&gt;#&lt;/a&gt; Runner 常用配置&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;避免每次都重新拉取镜像（config.toml）：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;figure class=&#34;highlight toml&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;section&#34;&gt;[[runners]]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;span class=&#34;section&#34;&gt;[runners.docker]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;pull_policy&lt;/span&gt; = &lt;span class=&#34;string&#34;&gt;&amp;quot;if-not-present&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;直接在 Runner 内使用宿主机 Docker：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;figure class=&#34;highlight toml&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;section&#34;&gt;[[runners]]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;span class=&#34;section&#34;&gt;[runners.docker]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;volumes&lt;/span&gt; = [&lt;span class=&#34;string&#34;&gt;&amp;quot;/var/run/docker.sock:/var/run/docker.sock&amp;quot;&lt;/span&gt;]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;hr /&gt;
+</content>
+        <category term="学习笔记" scheme="http://blog.zenixp.com/categories/note/" />
+        <category term="docker" scheme="http://blog.zenixp.com/tags/docker/" />
+        <category term="docker-compose" scheme="http://blog.zenixp.com/tags/docker-compose/" />
+        <category term="gitlab" scheme="http://blog.zenixp.com/tags/gitlab/" />
+        <updated>2025-09-08T16:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://blog.zenixp.com/2a1f6fb3-87a2-80ed-81b3-fe18fe6ac865/</id>
+        <title>部署nexus作为docker镜像的私有仓库</title>
+        <link rel="alternate" href="http://blog.zenixp.com/2a1f6fb3-87a2-80ed-81b3-fe18fe6ac865/"/>
+        <content type="html">&lt;h3 id=&#34;前言&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#前言&#34;&gt;#&lt;/a&gt; 前言&lt;/h3&gt;
+&lt;p&gt;在学习 k8s 时，打包应用镜像，需要搭建 docker 私有仓库，网路上主流都是用 harbor，但 harbor 部署时占用了太多资源，对于使用过 maven 私有库的人应该不陌生的 nexus 就可以拿来作为 docker 私有仓库来使用。&lt;/p&gt;
+&lt;h3 id=&#34;部署&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#部署&#34;&gt;#&lt;/a&gt; 部署&lt;/h3&gt;
+&lt;p&gt;这里使用 docker-compose 来部署&lt;/p&gt;
+&lt;p&gt;创建 docker-compose.yml&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&#34;highlight yaml&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;attr&#34;&gt;services:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;span class=&#34;attr&#34;&gt;nexus:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;container_name:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;nexus&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;image:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;sonatype/nexus3&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;volumes:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;bullet&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;./nexus-data:/nexus-data&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;ports:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;bullet&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;number&#34;&gt;8081&lt;/span&gt;&lt;span class=&#34;string&#34;&gt;:8081&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;restart:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;on-failure&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;network_mode:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;bridge&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;执行下面命令启动容器&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;docker-compose up -d&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&#34;配置&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#配置&#34;&gt;#&lt;/a&gt; 配置&lt;/h3&gt;
+&lt;p&gt;第一次登录默认账号是 admin，默认密码在./nexus-data/admin.password&lt;/p&gt;
+&lt;p&gt;启动后默认已经有 maven 和 nuget 的私库配置，但是没有 docker 的，需要我们自己创建&lt;/p&gt;
+&lt;p&gt;进入菜单 Settings &amp;gt; Repository &amp;gt; Repositories，点击 Create repository 创建仓库，类型选择 docker (hosted)&lt;/p&gt;
+&lt;p&gt;Name 这里设置成 docker-hosted 或者自己写一个&lt;/p&gt;
+&lt;p&gt;Allow anonymous docker pul 勾起来，其他默认配置即可&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/assets/2a1f6fb3-87a2-80ed-81b3-fe18fe6ac865/1762394726616_image.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;使用&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#使用&#34;&gt;#&lt;/a&gt; 使用&lt;/h3&gt;
+&lt;p&gt;创建好后使用下面命令就可以把镜像推送到私有仓库了&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;docker login &amp;lt;你的域名或者ip地址&amp;gt;:8081 -u admin -p &amp;lt;admim密码&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;docker build -t &amp;lt;你的域名或者ip地址&amp;gt;:8081/docker-hosted/image:tag .&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;docker push &amp;lt;你的域名或者ip地址&amp;gt;:8081/docker-hosted/image:tag&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;docker 默认使用的是 https，服务只能通过 http 访问时需要在 daemon.json 里添加下面配置允许 http&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&#34;highlight json&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;attr&#34;&gt;&amp;quot;insecure-registries&amp;quot;&lt;/span&gt;&lt;span class=&#34;punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;punctuation&#34;&gt;[&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;span class=&#34;string&#34;&gt;&amp;quot;&amp;lt;你的域名或者ip地址&amp;gt;:8081&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;punctuation&#34;&gt;]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+</content>
+        <category term="学习笔记" scheme="http://blog.zenixp.com/categories/note/" />
+        <category term="docker" scheme="http://blog.zenixp.com/tags/docker/" />
+        <category term="docker-compose" scheme="http://blog.zenixp.com/tags/docker-compose/" />
+        <category term="nexus" scheme="http://blog.zenixp.com/tags/nexus/" />
+        <updated>2025-07-08T16:00:00.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://blog.zenixp.com/2a2f6fb3-87a2-8028-a6e1-eac908237d48/</id>
+        <title>搭建softether 随时随地访问本地资源</title>
+        <link rel="alternate" href="http://blog.zenixp.com/2a2f6fb3-87a2-8028-a6e1-eac908237d48/"/>
+        <content type="html">&lt;h2 id=&#34;前言&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#前言&#34;&gt;#&lt;/a&gt; 前言&lt;/h2&gt;
+&lt;p&gt;在进行大型项目外包或协作时，经常需要通过 VPN 访问私有代码仓库或内网资源。本文演示如何使用 &lt;a href=&#34;https://www.softether.org/&#34;&gt;&lt;strong&gt;SoftEther&lt;/strong&gt;&lt;/a&gt; 快速搭建一个稳定、易用的开发访问环境。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;SoftEther&lt;/strong&gt; 由日本筑波大学开发，是一款开源的多协议 VPN 平台，支持多种连接方式。想进一步了解其功能与特性，可前往&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuc29mdGV0aGVyLm9yZy8=&#34;&gt;官网&lt;/span&gt;查看。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;服务端&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#服务端&#34;&gt;#&lt;/a&gt; 服务端&lt;/h2&gt;
+&lt;p&gt;准备一台拥有公网 IP 的服务器用于运行 VPN 服务，对硬件要求不高。本文使用 Docker 部署。&lt;/p&gt;
+&lt;p&gt;创建 docker-compose.yml：&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&#34;highlight yaml&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;attr&#34;&gt;services:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  &lt;span class=&#34;attr&#34;&gt;softethervpn:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;container_name:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;softethervpn&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;image:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;siomiz/softethervpn&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;cap_add:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;bullet&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;NET_ADMIN&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;ports:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;bullet&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;quot;10443:443/tcp&amp;quot;&lt;/span&gt; &lt;span class=&#34;comment&#34;&gt;# OpenVPN over HTTPS&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;bullet&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;quot;500:500/udp&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;bullet&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;quot;4500:4500/udp&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;bullet&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;quot;1701:1701/tcp&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;span class=&#34;attr&#34;&gt;environment:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;attr&#34;&gt;SPW:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;lt;服务端管理密码&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;attr&#34;&gt;HPW:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;&amp;lt;默认&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;Hub（&amp;quot;DEFAULT&amp;quot;）的密码&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;      &lt;span class=&#34;attr&#34;&gt;PSK:&lt;/span&gt; &lt;span class=&#34;string&#34;&gt;notasecret&lt;/span&gt; &lt;span class=&#34;comment&#34;&gt;# L2TP/IPSec 共享密钥&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;启动容器：&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;docker-compose up -d&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;请在云服务控制台或防火墙中放通上述端口。&lt;/p&gt;
+&lt;p&gt;接着&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuc29mdGV0aGVyLWRvd25sb2FkLmNvbS9jbi5hc3B4P3Byb2R1Y3Q9c29mdGV0aGVy&#34;&gt;下载&lt;/span&gt;服务端管理工具：&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/assets/2a2f6fb3-87a2-8028-a6e1-eac908237d48/1763057114522_image.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;以下以 Windows 版为例进行说明。打开管理工具，使用 &amp;lt;服务器 IP&amp;gt;:10443 连接至服务端，密码为 docker-compose.yml 中的 SPW。&lt;/p&gt;
+&lt;p&gt;进入后选择「管理虚拟 Hub」，用于管理用户与访问策略。先点击「虚拟 NAT 和虚拟 DHCP 服务器」，确保 SecureNAT 已启用，然后进入「SecureNAT 配置」。在此可设置 VPN 的虚拟网段，建议避开与本地网络重复的网段。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;建议：将「应用到客户端的选项」留空，可避免 “全流量走 VPN”，仅让虚拟网卡网段内的流量走 VPN。&lt;/li&gt;
+&lt;li&gt;如需全量流量经服务端转发，可将默认网关设置为虚拟网卡地址。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img data-src=&#34;/assets/2a2f6fb3-87a2-8028-a6e1-eac908237d48/1763057115386_image.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;至此，服务端配置完成。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;客户端&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#客户端&#34;&gt;#&lt;/a&gt; 客户端&lt;/h2&gt;
+&lt;h3 id=&#34;linux&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#linux&#34;&gt;#&lt;/a&gt; Linux&lt;/h3&gt;
+&lt;p&gt;Linux 客户端配置相对繁琐，可使用笔者整理好的&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL3plbml4cC9zb2Z0ZXRoZXItc2NyaXB0cy5naXQ=&#34;&gt;脚本&lt;/span&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;git pull &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;https://github.com/zenixp/softether-scripts.git&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;cd softether-scripts&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;然后从官网下载对应版本的 Linux 客户端：&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/assets/2a2f6fb3-87a2-8028-a6e1-eac908237d48/1763057116461_2025-11-13_18.24.58.png&#34; alt=&#34;%E6%88%AA%E5%B1%8F2025-11-13_18.24.58.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;将压缩包放到项目目录后执行安装脚本：&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sh client_&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;install.sh&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; softether-vpnclient-v4.43-9799-beta-2023.08.31-linux-x64-64bit.tar.gz&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;创建账户（username 和 password 为服务端「用户管理」中创建的账号密码）：&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sh &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;create.sh&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; --server &amp;lt;服务器IP或域名:10443&amp;gt; --username &amp;lt;用户名&amp;gt; --password &amp;lt;密码&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;启动连接并为客户端虚拟网卡设置静态 IP。该 IP 需位于服务端 DHCP 配置的网段内；若子网掩码为 255.255.255.0，请在 IP 后加 /24：&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&#34;highlight shell&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sh &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;start.sh&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt; 192.168.86.100/24&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;可将启动脚本加入 crontab 或配置为 systemd service 实现开机自启。其他用法参考&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL3plbml4cC9zb2Z0ZXRoZXItc2NyaXB0cy9ibG9iL21haW4vUkVBRE1FX0NOLm1k&#34;&gt;文档&lt;/span&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;windows&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#windows&#34;&gt;#&lt;/a&gt; Windows&lt;/h3&gt;
+&lt;p&gt;从官网&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuc29mdGV0aGVyLWRvd25sb2FkLmNvbS9jbi5hc3B4P3Byb2R1Y3Q9c29mdGV0aGVy&#34;&gt;下载&lt;/span&gt;对应版本的客户端。&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;../assets/2a2f6fb3-87a2-8028-a6e1-eac908237d48/1763057117174_2025-11-13_23.14.07.png&#34; alt=&#34;%E6%88%AA%E5%B1%8F2025-11-13_23.14.07.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;安装完成后，打开客户端，依次点击「连接」&amp;gt;「新 VPN 连接设置」。首次新建会自动创建虚拟网卡。&lt;/p&gt;
+&lt;p&gt;按服务端配置填写红框内信息，选择虚拟网卡后点击「确定」。&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/assets/2a2f6fb3-87a2-8028-a6e1-eac908237d48/1763057117860_image.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;右键刚创建的连接，点击「连接」即可。右键选择「启动连接设置」可实现开机自启动。若需要静态 IP，可在系统网络设置中找到该虚拟网卡并配置。&lt;/p&gt;
+&lt;h3 id=&#34;macos-与-ios&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#macos-与-ios&#34;&gt;#&lt;/a&gt; macOS 与 iOS&lt;/h3&gt;
+&lt;p&gt;macOS 与 iOS 可使用系统内置 L2TP：&lt;/p&gt;
+&lt;p&gt;设置 &amp;gt; VPN &amp;gt; 添加 VPN 设置，选择 L2TP。&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;/assets/2a2f6fb3-87a2-8028-a6e1-eac908237d48/1763057119055_image.png&#34; alt=&#34;image.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;配置与 Windows 基本一致，服务器地址无需填写端口。共享密钥填写 docker-compose.yml 中的 PSK（默认 notasecret）。如需静态 IP，可在「TCP/IP」中配置。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;iOS 提示：若服务端未配置默认网关，请关闭「发送所有流量」，否则可能无法上网。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;p&gt;完成以上配置后，便可通过 VPN 随时随地访问本地资源。&lt;/p&gt;
+</content>
+        <category term="学习笔记" scheme="http://blog.zenixp.com/categories/note/" />
+        <category term="docker" scheme="http://blog.zenixp.com/tags/docker/" />
+        <category term="softether" scheme="http://blog.zenixp.com/tags/softether/" />
+        <category term="vpn" scheme="http://blog.zenixp.com/tags/vpn/" />
+        <updated>2025-05-04T16:00:00.000Z</updated>
+    </entry>
+</feed>
