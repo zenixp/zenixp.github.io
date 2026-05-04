@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>哆啦电竞俱乐部</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+        :root {
+            --primary: #1de9b6;
+            --bg: #0a0b14;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .font-cyber {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* 霓虹发光效果 */
+        .neon-text {
+            text-shadow: 0 0 8px rgba(29, 233, 182, 0.5);
+        }
+
+        /* 隐藏滚动条 */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* 跑马灯动画 */
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-150%); }
+        }
+        .animate-marquee {
+            display: inline-block;
+            animation: marquee 15s linear infinite;
+        }
+
+        /* 页面显示动画 */
+        .page-fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 侧边滑入动画 */
+        .slide-in {
+            animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body class="max-w-md mx-auto relative min-h-screen pb-20">
+
+    <!-- 全局头部 -->
+    <header id="main-header" class="px-4 pt-8 pb-4 flex items-center justify-between sticky top-0 bg-[#0a0b14]/90 backdrop-blur-md z-40">
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-[#1de9b6] rounded-lg flex items-center justify-center shadow-[0_0_15px_rgba(29,233,182,0.4)]">
+                <i data-lucide="zap" class="text-black w-5 h-5 fill-current"></i>
+            </div>
+            <h1 class="text-xl font-black italic tracking-tighter neon-text">哆啦电竞</h1>
+        </div>
+        <div class="flex gap-4">
+            <i data-lucide="search" class="w-5 h-5 text-gray-500"></i>
+            <i data-lucide="bell" class="w-5 h-5 text-gray-500"></i>
+        </div>
+    </header>
+
+    <!-- 1. 首页 -->
+    <section id="page-home" class="page-content hidden px-4 py-2 page-fade-in">
+        <!-- Banner -->
+        <div class="relative h-44 w-full rounded-2xl overflow-hidden shadow-lg mb-6">
+            <div class="absolute inset-0 bg-gradient-to-tr from-[#1de9b6]/30 to-purple-600/30 z-10"></div>
+            <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover grayscale-[20%]" alt="Banner">
+            <div class="absolute inset-0 p-5 flex flex-col justify-end z-20">
+                <p class="text-[#1de9b6] text-[10px] font-bold tracking-[0.2em] mb-1 uppercase">DELTA FORCE PRO</p>
+                <h2 class="text-2xl font-black italic tracking-tighter text-white">王牌陪练 实力加冕</h2>
+                <div class="mt-2 flex items-center gap-2">
+                    <span class="bg-[#1de9b6] text-black text-[9px] px-2 py-0.5 rounded font-bold shadow-[0_0_10px_rgba(29,233,182,0.5)]">全地图覆盖</span>
+                </div>
+            </div>
+            <div class="absolute inset-0 border border-[#1de9b6]/30 rounded-2xl pointer-events-none"></div>
+        </div>
+
+        <!-- 金刚区 -->
+        <div class="grid grid-cols-2 gap-3 mb-6">
+            <div onclick="switchNav('category', '跑刀')" class="bg-gradient-to-br from-gray-800 to-gray-900/50 p-4 rounded-2xl border border-gray-700 relative overflow-hidden active:scale-95 transition-transform cursor-pointer">
+                <h3 class="font-bold text-lg italic text-purple-400">跑刀专家</h3>
+                <p class="text-[10px] text-gray-500 mt-1">物资代刷 · 全图开荒</p>
+                <i data-lucide="chevron-right" class="absolute bottom-4 right-4 w-4 h-4 text-gray-600"></i>
+            </div>
+            <div class="flex flex-col gap-3">
+                <div onclick="switchNav('category', '陪练')" class="bg-gradient-to-br from-gray-800 to-gray-900/50 p-3 rounded-2xl border border-gray-700 flex items-center justify-between active:scale-95 transition-transform cursor-pointer">
+                    <div>
+                        <h3 class="font-bold italic text-[#1de9b6] text-sm">陪练专区</h3>
+                        <p class="text-[9px] text-gray-500">大神带飞</p>
+                    </div>
+                    <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-gray-600"></i>
+                </div>
+                <div onclick="switchNav('category', '回收')" class="bg-gradient-to-br from-gray-800 to-gray-900/50 p-3 rounded-2xl border border-gray-700 flex items-center justify-between active:scale-95 transition-transform cursor-pointer">
+                    <div>
+                        <h3 class="font-bold italic text-blue-400 text-sm">物资回收</h3>
+                        <p class="text-[9px] text-gray-500">实时结算</p>
+                    </div>
+                    <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-gray-600"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- 跑马灯 -->
+        <div class="bg-gray-900/40 border border-gray-800 rounded-full px-4 py-2 flex items-center gap-3 mb-6 overflow-hidden">
+            <i data-lucide="bell" class="w-3.5 h-3.5 text-[#1de9b6]"></i>
+            <div class="flex-1 overflow-hidden whitespace-nowrap">
+                <div class="animate-marquee text-[10px] text-gray-400">
+                    <span class="text-[#1de9b6]">恭喜【三角洲特工】</span> 升级为 <span class="text-purple-400">【至尊VIP2】</span> · 刚刚完成了 [长弓溪谷带飞] ...
+                </div>
+            </div>
+        </div>
+
+        <!-- 推荐列表 -->
+        <div class="space-y-4">
+            <h2 class="text-lg font-bold italic tracking-wider flex items-center gap-2">
+                <div class="w-1.5 h-5 bg-[#1de9b6] rounded-full shadow-[0_0_8px_#1de9b6]"></div>
+                热门推荐
+            </h2>
+            <div id="home-product-list" class="grid grid-cols-2 gap-4">
+                <!-- 由JS填充 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. 分类页 -->
+    <section id="page-category" class="page-content hidden h-[calc(100vh-180px)] page-fade-in flex">
+        <div id="category-sidebar" class="w-24 bg-gray-900/20 border-r border-gray-800 flex flex-col pt-4 shrink-0">
+            <!-- 由JS填充 -->
+        </div>
+        <div id="category-product-list" class="flex-1 overflow-y-auto p-4 space-y-4 no-scrollbar">
+            <!-- 由JS填充 -->
+        </div>
+    </section>
+
+    <!-- 3. 个人中心 -->
+    <section id="page-user" class="page-content hidden px-4 py-2 page-fade-in">
+        <div onclick="showFullPage('page-edit-profile')" class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-6 border border-gray-700 relative overflow-hidden shadow-2xl mt-4 active:scale-95 transition-transform cursor-pointer">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-[#1de9b6]/10 blur-3xl rounded-full -mr-10 -mt-10"></div>
+            <div class="flex items-center gap-4 relative z-10">
+                <div class="w-16 h-16 rounded-2xl border-2 border-[#1de9b6] p-0.5 bg-gray-800">
+                    <img id="display-avatar" src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?q=80&w=200&auto=format&fit=crop" class="w-full h-full object-cover rounded-xl" alt="Avatar">
+                </div>
+                <div class="flex-1">
+                    <div class="flex items-center gap-2">
+                        <h2 id="display-nickname" class="text-lg font-black italic">阿哆</h2>
+                        <div class="bg-[#1de9b6] text-black text-[8px] font-black px-1.5 py-0.5 rounded italic">VIP 2</div>
+                    </div>
+                    <div class="mt-1.5 space-y-0.5">
+                        <p class="text-[10px] text-gray-500 font-mono tracking-wider flex items-center gap-2">
+                            <span class="text-gray-600 uppercase">Game ID:</span> <span id="display-gameid">Delta_Dora_01</span>
+                        </p>
+                        <p class="text-[10px] text-gray-500 flex items-center gap-2">
+                            <span class="text-gray-600">服务器:</span> <span id="display-server">零号大坝</span>
+                        </p>
+                    </div>
+                </div>
+                <i data-lucide="settings" class="w-5 h-5 text-gray-600"></i>
+            </div>
+            <div class="grid grid-cols-2 mt-8 border-t border-gray-700/50 pt-4 relative z-10">
+                <div class="text-center border-r border-gray-700/50">
+                    <p class="text-sm font-black text-[#1de9b6] italic">12</p>
+                    <p class="text-[10px] text-gray-500 mt-1">优惠券</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-sm font-black text-white italic">4.2w</p>
+                    <p class="text-[10px] text-gray-500 mt-1">积分</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 订单入口 -->
+        <div class="bg-gray-900/40 rounded-2xl border border-gray-800 p-4 mt-6">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-sm font-bold italic flex items-center gap-2">
+                    <i data-lucide="clipboard-list" class="w-4 h-4 text-[#1de9b6]"></i> 我的订单
+                </h3>
+                <button onclick="openOrders('全部')" class="text-[10px] text-gray-600 flex items-center">全部订单 <i data-lucide="chevron-right" class="w-3 h-3"></i></button>
+            </div>
+            <div class="grid grid-cols-3 gap-2">
+                <div onclick="openOrders('待付款')" class="flex flex-col items-center gap-2 py-1 active:scale-90 transition-transform cursor-pointer">
+                    <div class="p-2.5 rounded-xl bg-gray-800 text-gray-400"><i data-lucide="wallet" class="w-6 h-6"></i></div>
+                    <span class="text-[11px] text-gray-500 font-bold">待付款</span>
+                </div>
+                <div onclick="openOrders('进行中')" class="flex flex-col items-center gap-2 py-1 active:scale-90 transition-transform cursor-pointer">
+                    <div class="p-2.5 rounded-xl bg-gray-800 text-gray-400"><i data-lucide="clock" class="w-6 h-6"></i></div>
+                    <span class="text-[11px] text-gray-500 font-bold">进行中</span>
+                </div>
+                <div onclick="openOrders('已完成')" class="flex flex-col items-center gap-2 py-1 active:scale-90 transition-transform cursor-pointer">
+                    <div class="p-2.5 rounded-xl bg-gray-800 text-gray-400"><i data-lucide="check-circle" class="w-6 h-6"></i></div>
+                    <span class="text-[11px] text-gray-500 font-bold">已完成</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-gray-900/40 rounded-2xl border border-gray-800 overflow-hidden mt-6">
+            <div class="flex items-center justify-between p-4 border-b border-gray-800/50 active:bg-gray-800 transition-colors">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-gray-800 flex items-center justify-center"><i data-lucide="message-square" class="w-4 h-4 text-gray-400"></i></div>
+                    <span class="text-sm font-medium text-gray-300">在线客服</span>
+                </div>
+                <i data-lucide="chevron-right" class="w-4 h-4 text-gray-700"></i>
+            </div>
+            <div class="flex items-center justify-between p-4 active:bg-gray-800 transition-colors">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-gray-800 flex items-center justify-center"><i data-lucide="heart" class="w-4 h-4 text-gray-400"></i></div>
+                    <span class="text-sm font-medium text-gray-300">我的收藏</span>
+                </div>
+                <i data-lucide="chevron-right" class="w-4 h-4 text-gray-700"></i>
+            </div>
+        </div>
+
+        <button class="w-full mt-6 bg-gray-900/40 border border-red-500/20 text-red-400 py-3 rounded-2xl text-sm font-bold flex items-center justify-center gap-2 active:bg-red-500/10 mb-10">
+            <i data-lucide="log-out" class="w-4 h-4"></i> 退出当前账号
+        </button>
+    </section>
+
+    <!-- 独立全屏页面容器 -->
+    <div id="full-page-container" class="fixed inset-0 z-50 bg-[#0a0b14] hidden overflow-y-auto">
+
+        <!-- 订单列表页 -->
+        <div id="page-orders" class="hidden min-h-screen slide-in">
+            <div class="sticky top-0 bg-[#0a0b14]/90 backdrop-blur-md px-4 pt-8 pb-2 border-b border-gray-800 z-10">
+                <div class="flex items-center justify-between mb-4">
+                    <button onclick="hideFullPage()" class="w-10 h-10 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-white">
+                        <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                    </button>
+                    <h2 class="text-lg font-black italic tracking-widest text-white">我的订单</h2>
+                    <div class="w-10"></div>
+                </div>
+                <div id="order-tabs" class="flex justify-around pb-2"></div>
+            </div>
+            <div id="order-list" class="p-4 space-y-4"></div>
+        </div>
+
+        <!-- 订单详情页 -->
+        <div id="page-order-detail" class="hidden min-h-screen slide-in bg-[#0a0b14]">
+            <div class="sticky top-0 bg-[#0a0b14]/90 backdrop-blur-md px-4 pt-8 pb-4 border-b border-gray-800 z-10">
+                <div class="flex items-center justify-between">
+                    <button onclick="openOrders('全部')" class="w-10 h-10 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-white">
+                        <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                    </button>
+                    <h2 class="text-lg font-black italic text-white">订单详情</h2>
+                    <i data-lucide="more-horizontal" class="w-6 h-6 text-gray-500"></i>
+                </div>
+            </div>
+            <div id="order-detail-content" class="p-4 space-y-6"></div>
+            <div class="p-6 space-y-4">
+                <button class="w-full bg-[#1de9b6] text-black py-3 rounded-full font-black italic shadow-lg active:scale-95">联系客服</button>
+            </div>
+        </div>
+
+        <!-- 下单结算页 -->
+        <div id="page-checkout" class="hidden min-h-screen slide-in bg-[#0a0b14]">
+            <div class="sticky top-0 bg-[#0a0b14]/90 backdrop-blur-md px-4 pt-8 pb-4 border-b border-gray-800 z-10">
+                <div class="flex items-center justify-between">
+                    <button onclick="showFullPage('page-detail')" class="w-10 h-10 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-white">
+                        <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                    </button>
+                    <h2 class="text-lg font-black italic text-white font-cyber neon-text">结算订单</h2>
+                    <div class="w-10"></div>
+                </div>
+            </div>
+            <div class="p-4 space-y-6">
+                <!-- 商品摘要 -->
+                <div id="checkout-item-box" class="bg-gray-900/40 border border-gray-800 rounded-3xl p-4 flex gap-4">
+                    <!-- JS填充 -->
+                </div>
+
+                <!-- 下单表单 -->
+                <div class="space-y-5">
+                    <div>
+                        <label class="text-[10px] text-[#1de9b6] uppercase font-bold ml-1 tracking-widest">游戏 ID</label>
+                        <input id="checkout-gameid" type="text" class="w-full bg-gray-900 border border-gray-800 rounded-2xl px-4 py-3 text-sm text-white focus:border-[#1de9b6] outline-none mt-1 font-mono">
+                    </div>
+                    <div>
+                        <label class="text-[10px] text-[#1de9b6] uppercase font-bold ml-1 tracking-widest">所属服务器</label>
+                        <select id="checkout-server" class="w-full bg-gray-900 border border-gray-800 rounded-2xl px-4 py-3 text-sm text-white focus:border-[#1de9b6] outline-none mt-1 appearance-none">
+                            <option>零号大坝</option>
+                            <option>长弓溪谷</option>
+                            <option>哈夫克</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-[10px] text-[#1de9b6] uppercase font-bold ml-1 tracking-widest">备注信息</label>
+                        <textarea id="checkout-remark" placeholder="请填写具体的时间要求或其他备注..." class="w-full bg-gray-900 border border-gray-800 rounded-2xl px-4 py-3 text-sm text-white focus:border-[#1de9b6] outline-none mt-1 min-h-[80px]"></textarea>
+                    </div>
+
+                    <!-- 账号密码区块 (选填) -->
+                    <div class="bg-gray-800/20 border border-dashed border-gray-700 rounded-3xl p-5 space-y-4">
+                        <div class="flex items-center gap-2 mb-1">
+                            <i data-lucide="shield" class="w-4 h-4 text-gray-500"></i>
+                            <span class="text-xs text-gray-500">账号托管信息 (可选填，仅代练/跑刀服务需要)</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="text-[9px] text-gray-600 uppercase font-bold ml-1">游戏账号</label>
+                                <input id="checkout-account" type="text" placeholder="手机/邮箱" class="w-full bg-transparent border-b border-gray-800 py-2 text-sm text-white outline-none focus:border-[#1de9b6] transition-colors">
+                            </div>
+                            <div>
+                                <label class="text-[9px] text-gray-600 uppercase font-bold ml-1">游戏密码</label>
+                                <input id="checkout-password" type="password" placeholder="******" class="w-full bg-transparent border-b border-gray-800 py-2 text-sm text-white outline-none focus:border-[#1de9b6] transition-colors">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-6">
+                <button onclick="confirmCheckout()" class="w-full bg-[#1de9b6] text-black py-4 rounded-full font-black italic tracking-widest shadow-[0_0_20px_rgba(29,233,182,0.4)] active:scale-95 transition-all">
+                    确认下单并支付
+                </button>
+            </div>
+        </div>
+
+        <!-- 商品详情页 -->
+        <div id="page-detail" class="hidden min-h-screen slide-in">
+            <button onclick="hideFullPage()" class="fixed top-6 left-4 w-10 h-10 rounded-full bg-black/40 border border-white/10 flex items-center justify-center z-[60] text-white">
+                <i data-lucide="chevron-left" class="w-6 h-6"></i>
+            </button>
+            <div id="detail-content" class="pb-32"></div>
+            <div class="fixed bottom-0 left-0 right-0 p-6 bg-[#0a0b14] border-t border-gray-800 flex items-center justify-between z-[60] max-w-md mx-auto">
+                <div id="detail-price-box"></div>
+                <button id="detail-order-btn" class="bg-[#1de9b6] text-black px-10 py-3 rounded-full font-black italic shadow-[0_0_20px_rgba(29,233,182,0.4)] active:scale-95">立即下单</button>
+            </div>
+        </div>
+
+        <!-- 个人信息修改页 -->
+        <div id="page-edit-profile" class="hidden min-h-screen slide-in">
+            <div class="sticky top-0 bg-[#0a0b14]/90 backdrop-blur-md px-4 pt-8 pb-4 border-b border-gray-800 z-10">
+                <div class="flex items-center justify-between">
+                    <button onclick="hideFullPage()" class="w-10 h-10 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center text-white">
+                        <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                    </button>
+                    <h2 class="text-lg font-black italic text-white">信息修改</h2>
+                    <button onclick="handleSaveProfile()" class="text-[#1de9b6] font-bold text-sm">保存</button>
+                </div>
+            </div>
+            <div class="p-6 space-y-8">
+                <div class="flex flex-col items-center gap-4">
+                    <div class="w-24 h-24 rounded-3xl border-2 border-[#1de9b6] p-1 bg-gray-800 relative shadow-lg">
+                        <img id="edit-avatar" src="" class="w-full h-full object-cover rounded-2xl" alt="">
+                        <div class="absolute inset-0 flex items-center justify-center bg-black/40 rounded-2xl">
+                            <i data-lucide="camera" class="w-6 h-6 text-[#1de9b6]"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-5">
+                    <div>
+                        <label class="text-[10px] text-gray-500 uppercase font-bold ml-1">昵称</label>
+                        <input id="input-nickname" type="text" class="w-full bg-gray-900 border border-gray-800 rounded-2xl px-4 py-3 text-sm text-white focus:border-[#1de9b6] outline-none mt-1">
+                    </div>
+                    <div>
+                        <label class="text-[10px] text-gray-500 uppercase font-bold ml-1">游戏内ID</label>
+                        <input id="input-gameid" type="text" class="w-full bg-gray-900 border border-gray-800 rounded-2xl px-4 py-3 text-sm text-white focus:border-[#1de9b6] outline-none mt-1 font-mono">
+                    </div>
+                    <div>
+                        <label class="text-[10px] text-gray-500 uppercase font-bold ml-1">所属服务器</label>
+                        <select id="input-server" class="w-full bg-gray-900 border border-gray-800 rounded-2xl px-4 py-3 text-sm text-white focus:border-[#1de9b6] outline-none mt-1 appearance-none">
+                            <option>零号大坝</option>
+                            <option>长弓溪谷</option>
+                            <option>哈夫克</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航栏 -->
+    <nav id="bottom-nav" class="fixed bottom-0 left-0 right-0 h-20 bg-[#0a0b14]/95 backdrop-blur-2xl border-t border-gray-800 flex items-center justify-around px-6 z-40 max-w-md mx-auto">
+        <button onclick="switchNav('home')" id="nav-home" class="flex flex-col items-center gap-1 group relative">
+            <div class="active-indicator absolute -top-1.5 w-6 h-1 bg-[#1de9b6] rounded-full hidden shadow-[0_0_10px_#1de9b6]"></div>
+            <i data-lucide="home" class="w-6 h-6 text-gray-500 transition-all"></i>
+            <span class="text-[10px] font-bold text-gray-500">首页</span>
+        </button>
+        <button onclick="switchNav('category')" id="nav-category" class="flex flex-col items-center gap-1 group relative">
+            <div class="active-indicator absolute -top-1.5 w-6 h-1 bg-[#1de9b6] rounded-full hidden shadow-[0_0_10px_#1de9b6]"></div>
+            <i data-lucide="grid" class="w-6 h-6 text-gray-500 transition-all"></i>
+            <span class="text-[10px] font-bold text-gray-500">分类</span>
+        </button>
+        <button onclick="switchNav('user')" id="nav-user" class="flex flex-col items-center gap-1 group relative">
+            <div class="active-indicator absolute -top-1.5 w-6 h-1 bg-[#1de9b6] rounded-full hidden shadow-[0_0_10px_#1de9b6]"></div>
+            <i data-lucide="user" class="w-6 h-6 text-gray-500 transition-all"></i>
+            <span class="text-[10px] font-bold text-gray-500">我的</span>
+        </button>
+    </nav>
+
+    <script>
+        // --- 数据定义 ---
+        const products = [
+            { id: 1, title: "长弓溪谷·全物资带飞", subtitle: "金币爆仓专用", tags: ["高胜率", "保底收益"], price: "19.9", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=600&auto=format&fit=crop", category: "跑刀", desc: "由S1赛季资深特工带队，保证单局收益不低于50万金币。" },
+            { id: 2, title: "零号大坝·王牌陪练", subtitle: "身法对枪教学", tags: ["包教学", "战术指导"], price: "25.0", img: "https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?q=80&w=600&auto=format&fit=crop", category: "陪练", desc: "专注于室内近战技巧。服务包含：预瞄位讲解、投掷物路径、以及大坝复杂地形转点。" },
+            { id: 3, title: "哈夫克·枪械代刷", subtitle: "全配件秒解锁", tags: ["快速升级", "纯手工"], price: "15.0", img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=600&auto=format&fit=crop", category: "物资", desc: "快速提升指定枪械等级，解锁全套配件。" },
+            { id: 4, title: "全图·金币回收", subtitle: "极速到账价格优", tags: ["秒到账", "价格公道"], price: "9.9", img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=600&auto=format&fit=crop", category: "回收", desc: "根据实时市场价格结算，多种支付方式。" }
+        ];
+
+        let orders = [
+            { id: "DL20240504001", title: "长弓溪谷·全物资带飞", price: "19.9", status: "进行中", time: "2024-05-04 10:20", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=200&auto=format&fit=crop", map: "长弓溪谷", payMethod: "积分支付" }
+        ];
+
+        let currentUser = {
+            nickname: "阿哆",
+            uid: "888666520",
+            gameId: "Delta_Dora_01",
+            server: "零号大坝",
+            avatar: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?q=80&w=200&auto=format&fit=crop"
+        };
+
+        let currentCategory = "陪练";
+        let currentOrderTab = "全部";
+        let currentProduct = null;
+
+        // --- 核心逻辑 ---
+
+        function init() {
+            lucide.createIcons();
+            renderHomeProducts();
+            renderCategorySidebar();
+            renderCategoryProducts();
+            updateProfileUI();
+            switchNav('home');
+        }
+
+        function switchNav(tab, subCategory = null) {
+            hideFullPage();
+            document.querySelectorAll('.page-content').forEach(p => p.classList.add('hidden'));
+            const target = document.getElementById('page-' + tab);
+            if (target) {
+                target.classList.remove('hidden');
+                if (tab === 'category') target.classList.add('flex');
+            }
+
+            document.querySelectorAll('#bottom-nav button').forEach(btn => {
+                const icon = btn.querySelector('i, svg');
+                const label = btn.querySelector('span');
+                const indicator = btn.querySelector('.active-indicator');
+                if (icon) { icon.classList.remove('text-[#1de9b6]'); icon.classList.add('text-gray-500'); }
+                if (label) { label.classList.remove('text-[#1de9b6]'); label.classList.add('text-gray-500'); }
+                if (indicator) indicator.classList.add('hidden');
+            });
+
+            const activeBtn = document.getElementById('nav-' + tab);
+            if (activeBtn) {
+                const icon = activeBtn.querySelector('i, svg');
+                const label = activeBtn.querySelector('span');
+                const indicator = activeBtn.querySelector('.active-indicator');
+                if (icon) { icon.classList.remove('text-gray-500'); icon.classList.add('text-[#1de9b6]'); }
+                if (label) { label.classList.remove('text-gray-500'); label.classList.add('text-[#1de9b6]'); }
+                if (indicator) indicator.classList.remove('hidden');
+            }
+
+            if(tab === 'category' && subCategory) {
+                currentCategory = subCategory;
+                renderCategorySidebar();
+                renderCategoryProducts();
+            }
+            window.scrollTo(0, 0);
+        }
+
+        function showFullPage(pageId) {
+            const container = document.getElementById('full-page-container');
+            container.classList.remove('hidden');
+            container.querySelectorAll(':scope > div').forEach(div => div.classList.add('hidden'));
+            const target = document.getElementById(pageId);
+            if (target) target.classList.remove('hidden');
+            document.getElementById('main-header').classList.add('hidden');
+            document.getElementById('bottom-nav').classList.add('hidden');
+            container.scrollTop = 0;
+            lucide.createIcons();
+        }
+
+        function hideFullPage() {
+            document.getElementById('full-page-container').classList.add('hidden');
+            document.getElementById('main-header').classList.remove('hidden');
+            document.getElementById('bottom-nav').classList.remove('hidden');
+        }
+
+        // --- 渲染逻辑 ---
+
+        function renderHomeProducts() {
+            const list = document.getElementById('home-product-list');
+            if (!list) return;
+            list.innerHTML = products.map(item => `
+                <div onclick="openDetail(${item.id})" class="bg-gray-900/40 border border-gray-800 rounded-2xl overflow-hidden relative active:scale-95 transition-all">
+                    <div class="h-40 relative">
+                        <img src="${item.img}" class="w-full h-full object-cover opacity-80" alt="">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0a0b14] via-transparent"></div>
+                    </div>
+                    <div class="p-3 space-y-1">
+                        <h4 class="text-sm font-bold truncate text-gray-200">${item.title}</h4>
+                        <div class="flex items-baseline gap-0.5">
+                            <span class="text-[#1de9b6] text-[10px] font-bold">¥</span>
+                            <span class="text-[#1de9b6] text-lg font-black italic">${item.price}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderCategorySidebar() {
+            const categories = ["陪练", "跑刀", "物资", "回收", "账号"];
+            const sidebar = document.getElementById('category-sidebar');
+            if (!sidebar) return;
+            sidebar.innerHTML = categories.map(cat => `
+                <button onclick="setCategory('${cat}')" class="relative py-5 text-sm font-bold transition-all ${currentCategory === cat ? 'text-[#1de9b6] scale-110' : 'text-gray-500'}">
+                    ${currentCategory === cat ? '<div class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-[#1de9b6] rounded-r-full shadow-[0_0_10px_#1de9b6]"></div>' : ''}
+                    ${cat}
+                </button>
+            `).join('');
+        }
+
+        function setCategory(cat) {
+            currentCategory = cat;
+            renderCategorySidebar();
+            renderCategoryProducts();
+        }
+
+        function renderCategoryProducts() {
+            const list = document.getElementById('category-product-list');
+            if (!list) return;
+            const filtered = products.filter(p => p.category === currentCategory);
+            if(filtered.length === 0) {
+                list.innerHTML = `<div class="flex flex-col items-center justify-center py-20 opacity-30"><i data-lucide="layout-grid" class="w-12 h-12 mb-2"></i><p class="text-sm">暂无服务</p></div>`;
+            } else {
+                list.innerHTML = filtered.map(item => `
+                    <div onclick="openDetail(${item.id})" class="bg-gray-900/40 border border-gray-800 p-3 rounded-2xl flex gap-3 active:bg-gray-800 transition-colors">
+                        <img src="${item.img}" class="w-20 h-20 rounded-xl object-cover shrink-0" alt="">
+                        <div class="flex-1 flex flex-col justify-between py-0.5">
+                            <h4 class="text-sm font-bold text-gray-100">${item.title}</h4>
+                            <div class="flex items-center justify-between">
+                                <span class="text-[#1de9b6] text-base font-black italic">¥${item.price}</span>
+                                <button class="bg-[#1de9b6]/10 text-[#1de9b6] text-[10px] font-bold px-3 py-1 rounded-full border border-[#1de9b6]/20">下单</button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            lucide.createIcons();
+        }
+
+        // --- 订单 & 结算逻辑 ---
+
+        function openOrders(tab) {
+            currentOrderTab = tab;
+            showFullPage('page-orders');
+            renderOrderTabs();
+            renderOrderList();
+        }
+
+        function renderOrderTabs() {
+            const tabs = ['全部', '待付款', '进行中', '已完成'];
+            const box = document.getElementById('order-tabs');
+            if (!box) return;
+            box.innerHTML = tabs.map(t => `
+                <button onclick="setOrderTab('${t}')" class="text-sm font-bold relative pb-2 ${currentOrderTab === t ? 'text-[#1de9b6]' : 'text-gray-500'}">
+                    ${t}${currentOrderTab === t ? '<div class="absolute bottom-0 left-0 right-0 h-1 bg-[#1de9b6] rounded-full shadow-[0_0_10px_#1de9b6]"></div>' : ''}
+                </button>
+            `).join('');
+        }
+
+        function setOrderTab(t) {
+            currentOrderTab = t;
+            renderOrderTabs();
+            renderOrderList();
+        }
+
+        function renderOrderList() {
+            const list = document.getElementById('order-list');
+            if (!list) return;
+            const filtered = orders.filter(o => currentOrderTab === '全部' || o.status === currentOrderTab);
+            list.innerHTML = filtered.map(o => `
+                <div onclick="openOrderDetail('${o.id}')" class="bg-gray-900/40 border border-gray-800 rounded-3xl p-4 space-y-4 active:border-[#1de9b6]/50 transition-all cursor-pointer">
+                    <div class="flex items-center justify-between text-[10px]">
+                        <span class="text-gray-500 font-mono">单号: ${o.id}</span>
+                        <span class="font-bold italic ${o.status === '待付款' ? 'text-red-400' : 'text-[#1de9b6]'}">${o.status}</span>
+                    </div>
+                    <div class="flex gap-4">
+                        <img src="${o.img}" class="w-16 h-16 rounded-xl object-cover" alt="">
+                        <div class="flex-1">
+                            <h4 class="text-sm font-bold text-white">${o.title}</h4>
+                            <p class="text-[10px] text-gray-500 mt-1 font-mono">${o.time}</p>
+                            <p class="text-white font-black italic mt-1">¥${o.price}</p>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-5 h-5 text-gray-700 self-center"></i>
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function openOrderDetail(id) {
+            const order = orders.find(o => o.id === id);
+            if (!order) return;
+            const content = document.getElementById('order-detail-content');
+            const statusIcon = order.status === '待付款' ? 'wallet' : (order.status === '进行中' ? 'clock' : 'check-circle');
+            const statusColor = order.status === '待付款' ? 'text-red-400' : (order.status === '进行中' ? 'text-[#1de9b6]' : 'text-blue-400');
+
+            content.innerHTML = `
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-6 border border-gray-700 flex items-center gap-4">
+                    <div class="p-3 rounded-2xl bg-gray-800 ${statusColor}"><i data-lucide="${statusIcon}" class="w-8 h-8"></i></div>
+                    <div><h3 class="text-xl font-black italic ${statusColor}">${order.status}</h3><p class="text-xs text-gray-500 mt-1">单号: ${order.id}</p></div>
+                </div>
+                <div class="bg-gray-900/40 border border-gray-800 rounded-3xl p-4 flex gap-4">
+                    <img src="${order.img}" class="w-20 h-20 rounded-2xl object-cover border border-gray-800" alt="">
+                    <div class="flex-1 flex flex-col justify-center">
+                        <h4 class="text-base font-bold text-gray-100">${order.title}</h4>
+                        <p class="text-[#1de9b6] font-black italic mt-1">¥${order.price}</p>
+                    </div>
+                </div>
+                <div class="bg-gray-900/40 border border-gray-800 rounded-3xl p-5 space-y-4 text-sm">
+                    <div class="flex justify-between items-center"><span class="text-gray-500 italic">下单时间</span><span class="text-gray-300 font-mono">${order.time}</span></div>
+                    <div class="flex justify-between items-center"><span class="text-gray-500 italic">服务地图</span><span class="text-gray-300">${order.map || '多地图'}</span></div>
+                    <div class="flex justify-between items-center"><span class="text-gray-500 italic">支付方式</span><span class="text-[#1de9b6] font-bold">${order.payMethod || '在线支付'}</span></div>
+                </div>
+            `;
+            showFullPage('page-order-detail');
+        }
+
+        // --- 商品详情 & 下单逻辑 ---
+
+        function openDetail(id) {
+            currentProduct = products.find(p => p.id === id);
+            const content = document.getElementById('detail-content');
+            if (!currentProduct || !content) return;
+            content.innerHTML = `
+                <img src="${currentProduct.img}" class="w-full h-80 object-cover shadow-2xl" alt="">
+                <div class="p-6 space-y-6">
+                    <div class="flex gap-2">
+                        ${currentProduct.tags.map(t => `<span class="bg-[#1de9b6]/20 text-[#1de9b6] text-[10px] px-2 py-0.5 rounded-full border border-[#1de9b6]/30 font-bold">${t}</span>`).join('')}
+                    </div>
+                    <h1 class="text-2xl font-black italic text-white leading-tight">${currentProduct.title}</h1>
+                    <div class="bg-gray-900/40 p-5 rounded-2xl border border-gray-800 text-xs text-gray-400 leading-relaxed">${currentProduct.desc}</div>
+                </div>
+            `;
+            document.getElementById('detail-price-box').innerHTML = `
+                <div class="flex items-baseline gap-1"><span class="text-[#1de9b6] text-2xl font-black italic">¥${currentProduct.price}</span><span class="text-gray-500 text-xs">/局</span></div>
+            `;
+            document.getElementById('detail-order-btn').onclick = () => openCheckout();
+            showFullPage('page-detail');
+        }
+
+        function openCheckout() {
+            if (!currentProduct) return;
+            const itemBox = document.getElementById('checkout-item-box');
+            itemBox.innerHTML = `
+                <img src="${currentProduct.img}" class="w-16 h-16 rounded-2xl object-cover shrink-0 border border-gray-800" alt="">
+                <div class="flex-1">
+                    <h4 class="text-sm font-bold text-white">${currentProduct.title}</h4>
+                    <p class="text-[#1de9b6] font-black italic mt-1 text-base">¥${currentProduct.price}</p>
+                </div>
+            `;
+            // 预填充用户信息
+            document.getElementById('checkout-gameid').value = currentUser.gameId;
+            document.getElementById('checkout-server').value = currentUser.server;
+            document.getElementById('checkout-remark').value = "";
+            document.getElementById('checkout-account').value = "";
+            document.getElementById('checkout-password').value = "";
+
+            showFullPage('page-checkout');
+        }
+
+        function confirmCheckout() {
+            const gameId = document.getElementById('checkout-gameid').value;
+            if(!gameId) {
+                alert("请输入您的游戏ID");
+                return;
+            }
+
+            // 模拟下单过程
+            const newOrder = {
+                id: "DL" + Date.now().toString().slice(-10),
+                title: currentProduct.title,
+                price: currentProduct.price,
+                status: "进行中",
+                time: new Date().toLocaleString().slice(0, 16).replace(/\//g, '-'),
+                img: currentProduct.img,
+                map: document.getElementById('checkout-server').value,
+                payMethod: "在线支付"
+            };
+
+            orders.unshift(newOrder);
+            openOrders('全部');
+        }
+
+        // --- 用户资料逻辑 ---
+
+        function updateProfileUI() {
+            document.getElementById('display-nickname').innerText = currentUser.nickname;
+            document.getElementById('display-gameid').innerText = currentUser.gameId;
+            document.getElementById('display-server').innerText = currentUser.server;
+            document.getElementById('display-avatar').src = currentUser.avatar;
+            document.getElementById('edit-avatar').src = currentUser.avatar;
+            document.getElementById('input-nickname').value = currentUser.nickname;
+            document.getElementById('input-gameid').value = currentUser.gameId;
+            document.getElementById('input-server').value = currentUser.server;
+        }
+
+        function handleSaveProfile() {
+            currentUser.nickname = document.getElementById('input-nickname').value;
+            currentUser.gameId = document.getElementById('input-gameid').value;
+            currentUser.server = document.getElementById('input-server').value;
+            updateProfileUI();
+            hideFullPage();
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
